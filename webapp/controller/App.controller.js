@@ -5,17 +5,19 @@ sap.ui.define([
     "sap/ui/model/resource/ResourceModel",
     "sap/m/Dialog",
     "sap/m/Button",
-    "sap/m/Text"
+    "sap/m/Input",
+    "sap/m/InputType",
+
    
     
- ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Text) {
+ ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Input, ) {
     "use strict";
     var dialogButtonRequest = new Button({
       text: "Abfragen",
       press: ""
     });
 
-    var dialogText = new Text({text:"bla"});
+   
 
     
 
@@ -57,7 +59,18 @@ sap.ui.define([
             });
             this.getView().addDependent(this.oDefaultDialog);
          } */
-         
+         var inputProductDescription = new Input({
+            description: "Produktbezeichnung",
+            type: "Text"
+         });
+         var inputGtin = new Input({
+            description: "GTIN",
+            type: "Number"
+         });
+         var inputBossNr = new Input({
+            description: "Boss-Nummer",
+            type: "Number"
+         });
 
          var dialogButtonCancel = new Button({
             text: "Schließen",
@@ -68,8 +81,19 @@ sap.ui.define([
          
          this.oDefaultDialog = new Dialog({
             title: "Workflow starten",
-            content: [dialogText,
-               dialogButtonRequest, dialogButtonCancel]
+            contentWidth: "700px",
+            contentHeight: "500px",
+            content: [inputProductDescription,inputGtin,inputBossNr],
+            beginButton: new Button({
+               text:"Abfragen", press: function(){}
+            
+            }),
+            endButton: new Button({
+               text:"Schließen",
+               press: function(){
+                  this.oDefaultDialog.close();
+               }.bind(this)
+            })
          })
           
 
