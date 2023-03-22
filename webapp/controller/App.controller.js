@@ -4,9 +4,21 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/resource/ResourceModel",
     "sap/m/Dialog",
+    "sap/m/Button",
     "sap/m/Text"
- ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Text) {
+   
+    
+ ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Text) {
     "use strict";
+    var dialogButtonRequest = new Button({
+      text: "Abfragen",
+      press: ""
+    });
+
+    var dialogText = new Text({text:"bla"});
+
+    
+
     return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
       onInit : function () {
           // set data model on view
@@ -46,17 +58,27 @@ sap.ui.define([
             this.getView().addDependent(this.oDefaultDialog);
          } */
          
+
+         var dialogButtonCancel = new Button({
+            text: "Schließen",
+            press: function () {
+               this.oDefaultDialog.close();
+            }.bind(this)
+          })
+         
          this.oDefaultDialog = new Dialog({
             title: "Workflow starten",
-            
-            
+            content: [dialogText,
+               dialogButtonRequest, dialogButtonCancel]
          })
           
 
 
 
          this.oDefaultDialog.open();
-       }
+       },
+
+
        
 
     });
