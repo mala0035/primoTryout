@@ -8,10 +8,12 @@ sap.ui.define([
     "sap/m/Input",
     "sap/m/InputType",
     "sap/m/ComboBox",
+    "sap/base/Log",
+    
 
    
     
- ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Input, ) {
+ ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Input, Inputtpy, ComboBox, Log) {
     "use strict";
 
 
@@ -21,11 +23,14 @@ sap.ui.define([
 
     return Controller.extend("sap.ui.demo.walkthrough.controller.App", {
       onInit : function () {
+         
+        
+       
           // set data model on view
           var oData = {
              recipient : {
-                name : "Schabalama",
-                name2 : ["Schabalama2","Schabalama3"]
+                name : "Test",
+                name2 : ["Test2","Test3"]
              }
           };
           var oModel = new JSONModel(oData);
@@ -47,9 +52,36 @@ sap.ui.define([
          
           
        },
+      
 
        onClickDialog : function () {
-         var dialogCombobox = this.getView("App.view.xml").byId("box0");
+         
+         var ComboBoxWorkflowItems = {
+            Workflowtypen : {
+               Type : ["Neueröffnung"]
+            }
+         }
+         var oModel2 = new JSONModel(ComboBoxWorkflowItems);
+         this.getView().setModel(oModel2);
+         var workflows = this.getView().getModel().getProperty("/WorkflowTypen/Type");
+
+
+         var categoryItemTemplate = new sap.ui.core.Item({ 
+         key : "Item1", 
+         text : "testText" 
+      });
+
+         //sap.base.Log.Log.info("test")
+      //Log.info([workflows]);
+      Log.warning([workflows]);
+         //var oItemTemplate1 = new sap.ui.core.ListItem();
+        // oItemTemplate1.bindProperty(text1);
+
+         var dialogCombobox = new ComboBox({
+            value:"Workflow auswählen",
+            items: [workflows]
+         
+         });
  
          var inputProductDescription = new Input({
             description: "Produktbezeichnung",
