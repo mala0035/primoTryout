@@ -16,6 +16,10 @@
       press=".onClickDialog"
       
       />
+      
+<ComboBox  id="box0">
+                         
+</ComboBox>
     
 </mvc:View>
 <!-- ariaHasPopup="Dialog" -->

@@ -7,17 +7,15 @@ sap.ui.define([
     "sap/m/Button",
     "sap/m/Input",
     "sap/m/InputType",
+    "sap/m/ComboBox",
 
    
     
  ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Input, ) {
     "use strict";
-    var dialogButtonRequest = new Button({
-      text: "Abfragen",
-      press: ""
-    });
 
-   
+
+    
 
     
 
@@ -51,14 +49,8 @@ sap.ui.define([
        },
 
        onClickDialog : function () {
-         // test dialog
-   /*        if(!this.oDefaultDialog){
-            this.oDefaultdialog = new Dialog({
-               title: "Available PProducts",
-               content: new Text ("Test")
-            });
-            this.getView().addDependent(this.oDefaultDialog);
-         } */
+         var dialogCombobox = this.getView("App.view.xml").byId("box0");
+ 
          var inputProductDescription = new Input({
             description: "Produktbezeichnung",
             type: "Text"
@@ -83,7 +75,11 @@ sap.ui.define([
             title: "Workflow starten",
             contentWidth: "700px",
             contentHeight: "500px",
-            content: [inputProductDescription,inputGtin,inputBossNr],
+            content: [
+               dialogCombobox,
+               inputProductDescription,
+               inputGtin,
+               inputBossNr],
             beginButton: new Button({
                text:"Abfragen", press: function(){}
             
