@@ -9,11 +9,12 @@ sap.ui.define([
     "sap/m/InputType",
     "sap/m/ComboBox",
     "sap/base/Log",
+  
     
 
    
     
- ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Input, Inputtpy, ComboBox, Log) {
+ ], function (Controller, MessageToast, JSONModel, ResourceModel, Dialog, Button, Input, Inputtpy, ComboBox, Log, ) {
     "use strict";
 
 
@@ -48,6 +49,7 @@ sap.ui.define([
           var sRecipient2 = this.getView().getModel().getProperty("/recipient/name2")
           var sMsg = oBundle.getText("helloMsg", [sRecipient2]);
           // show message
+          Log.warning(sRecipient2);
           MessageToast.show(sMsg); 
          
           
@@ -63,23 +65,39 @@ sap.ui.define([
          }
          var oModel2 = new JSONModel(ComboBoxWorkflowItems);
          this.getView().setModel(oModel2);
-         var workflows = this.getView().getModel().getProperty("/WorkflowTypen/Type");
+         var workflows = this.getView().getModel().getProperty("/Workflowtypen/Type");
 
 
          var categoryItemTemplate = new sap.ui.core.Item({ 
          key : "Item1", 
-         text : "testText" 
+         text : "testText",
+         
+      });
+      var categoryItemTemplate2 = new sap.ui.core.Item({ 
+         key : "Item1", 
+         text : "testText2" 
       });
 
-         //sap.base.Log.Log.info("test")
-      //Log.info([workflows]);
+      var workflowlist = new sap.m.List({
+
+      })
+
+        
+      
       Log.warning([workflows]);
-         //var oItemTemplate1 = new sap.ui.core.ListItem();
-        // oItemTemplate1.bindProperty(text1);
+         var oItemTemplate1 = new sap.ui.core.ListItem();
+         //oItemTemplate1.bindProperty(workflows);
 
          var dialogCombobox = new ComboBox({
             value:"Workflow auswählen",
-            items: [workflows]
+            items: [
+        new sap.ui.core.Item({text: "Neueröffnung"}),
+        new sap.ui.core.Item({text: "Mutation"}),
+        new sap.ui.core.Item({text: "Preisabschlag"}),
+        new sap.ui.core.Item({text: "Preisaufschlag"}),
+        new sap.ui.core.Item({text: "Saisonzeitraum"}),
+        new sap.ui.core.Item({text: "Auslauf"}),
+    ]
          
          });
  
