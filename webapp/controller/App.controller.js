@@ -60,44 +60,28 @@ sap.ui.define([
          
          var ComboBoxWorkflowItems = {
             Workflowtypen : {
-               Type : ["Neueröffnung"]
+               Type : [
+                  {text:"Neueröffnung"},
+                  {text:"Mutation"},
+                  {text:"Preisabschlag"},
+                  {text:"Preisaufschlag"},
+                  {text:"Saisonzeitraum"},
+                  {text:"Auslauf"},
+               
+               ]
             }
          }
          var oModel2 = new JSONModel(ComboBoxWorkflowItems);
          this.getView().setModel(oModel2);
-         var workflows = this.getView().getModel().getProperty("/Workflowtypen/Type");
-
-
-         var categoryItemTemplate = new sap.ui.core.Item({ 
-         key : "Item1", 
-         text : "testText",
-         
-      });
-      var categoryItemTemplate2 = new sap.ui.core.Item({ 
-         key : "Item1", 
-         text : "testText2" 
-      });
-
-      var workflowlist = new sap.m.List({
-
-      })
-
-        
+         var workflows = this.getView().getModel().getProperty("/Workflowtypen/Type/");
+             
       
-      Log.warning([workflows]);
-         var oItemTemplate1 = new sap.ui.core.ListItem();
-         //oItemTemplate1.bindProperty(workflows);
+      Log.warning(workflows);
+
 
          var dialogCombobox = new ComboBox({
             value:"Workflow auswählen",
-            items: [
-        new sap.ui.core.Item({text: "Neueröffnung"}),
-        new sap.ui.core.Item({text: "Mutation"}),
-        new sap.ui.core.Item({text: "Preisabschlag"}),
-        new sap.ui.core.Item({text: "Preisaufschlag"}),
-        new sap.ui.core.Item({text: "Saisonzeitraum"}),
-        new sap.ui.core.Item({text: "Auslauf"}),
-    ]
+            items: [workflows]
          
          });
  
