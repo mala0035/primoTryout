@@ -78,6 +78,52 @@ sap.ui.define([
       
       Log.warning(workflows);
 
+      var spaceBox = new sap.m.VBox({height : "60px"})
+
+
+         var oLabelProduktbezeichnung = new sap.m.Label({
+            text: "Produktbezeichnung",
+
+
+
+
+         });
+
+         var oInputProduktbezeichnung = new sap.m.Input({
+            
+         })
+
+         var oLabelGTIN = new sap.m.Label({
+            text: "GTIN"
+         });
+
+         var oInputGTIN = new sap.m.Input({
+            
+         })
+
+         var oLabelBossNummer = new sap.m.Label({
+            text: "Boss-Nummer"
+         });
+
+         var oInputBossNummer = new sap.m.Input({
+            
+         })
+
+
+         var oFlexboxInputs = new sap.m.FlexBox({
+            alignItems: "Start",
+            justifyContent: "Start",
+            height: "100%",
+            width: "100%",
+            direction: "Column",
+            items: [spaceBox,oLabelProduktbezeichnung, oInputProduktbezeichnung,oLabelGTIN,oInputGTIN,oLabelBossNummer,oInputBossNummer]
+        });
+        
+
+        var oViewInputs = new sap.ui.core.mvc.View({
+         content: [oFlexboxInputs]
+     });
+
 
          var dialogCombobox = new ComboBox({
             value:"Workflow auswählen",
@@ -98,12 +144,7 @@ sap.ui.define([
             type: "Number"
          });
 
-         var dialogButtonCancel = new Button({
-            text: "Schließen",
-            press: function () {
-               this.oDefaultDialog.close();
-            }.bind(this)
-          })
+      
          
          this.oDefaultDialog = new Dialog({
             title: "Workflow starten",
@@ -111,9 +152,8 @@ sap.ui.define([
             contentHeight: "500px",
             content: [
                dialogCombobox,
-               inputProductDescription,
-               inputGtin,
-               inputBossNr],
+               oViewInputs,
+               ],
             beginButton: new Button({
                text:"Abfragen", press: function(){}
             
